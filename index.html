@@ -170,7 +170,7 @@
                 <p><i>
                     Để lại số điện thoại hoặc email của bạn, Thiên thảo AnAn sẽ liên hệ và tư vấn cho bạn sớm nhất có thể
                 </i></p>
-                <form id="contact-form" action="https://formspree.io/thienthaoanan@gmail.com" method="post">
+                <form id="buy-form" action="https://formspree.io/thienthaoanan@gmail.com" method="post">
                     <div class="form-group">
                         <input class="form-control" type="text" name="tel-email" placeholder="Số điện thoại hoặc email">
                     </div>
@@ -255,6 +255,36 @@
             $('a[href*=\\#]').on('click', function(event){     
                 event.preventDefault();
                 $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+            });
+
+            // process buy form
+            var $contactForm = $('#buy-form');
+            $contactForm.submit(function(e) {
+                e.preventDefault();
+                var $submit = $('#buy-form button');
+                var defaultSubmitText = $submit.html();
+
+                $.ajax({
+                    url: 'https://formspree.io/thienthaoanan@gmail.com',
+                    method: 'POST',
+                    data: $(this).serialize() + '&url=' + encodeURIComponent(window.location),
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $submit.attr('disabled', true).html('Đang xử lí...');
+                    },
+                    success: function(data) {
+                        $submit.html('Đã gửi!');
+                        setTimeout(function() {
+                            $submit.attr('disabled', false).html(defaultSubmitText);
+                        }, 5000);
+                    },
+                    error: function(err) {
+                        $submit.html('Có lỗi xảy ra!');
+                        setTimeout(function() {
+                            $submit.attr('disabled', false).html(defaultSubmitText);
+                        }, 5000);
+                    }
+                });
             });
         });
        
