@@ -1,0 +1,29 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,a {
+	font-family: 'Open Sans', sans-serif;
+}
+h1,h2,h3 {
+    color: #0B960B;
+    font-weight: bold;
+}
+h4,h5,h6 {
+    color: #0F960B;
+    font-weight: bold;
+}
+
+.buy-section {
+    margin: 30px auto;
+    background-color: #F1F1F1;
+}
+
+div.buy-section button {
+    width: 100%;
+}
+
+strong {
+    color: #6E231E;
+}
